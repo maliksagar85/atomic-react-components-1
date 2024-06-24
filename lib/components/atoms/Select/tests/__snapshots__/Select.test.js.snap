@@ -3,8 +3,11 @@
 exports[`Select Component should render correctly 1`] = `
 <select
   className=""
+  data-locator="my-custom-select-locator"
   disabled={false}
-  value=""
+  id="dropdown-1"
+  name="my-drop"
+  onChange={[Function]}
 >
   <option
     key="Option 1"

@@ -1,39 +1,67 @@
 import 'react-app-polyfill/ie11';
 import React from 'react';
-import { configure, setAddon, addDecorator } from '@storybook/react';
-import { setOptions } from '@storybook/addon-options';
-import chaptersAddon, { setDefaults } from 'react-storybook-addon-chapters';
-import { withConsole } from '@storybook/addon-console';
+import { configure, setAddon, addDecorator, addParameters } from '@storybook/react';
+import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
+import { withKnobs } from '@storybook/addon-knobs';
+import { withDesign } from 'storybook-addon-designs';
+import { withTests } from '@storybook/addon-jest';
+import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider } from 'styled-components';
-import Theme from '../lib/styles/theme';
+import theme from '../lib/styles/themes/base/index';
 import '../lib/styles/cssIncludes';
-import '../lib/styles';
+import GlobalStyles from '../lib/styles';
+import results from '../.jest-test-results.json';
 
-setOptions({
-  name: `Atomic React Pattern Library`,
-  url:
-    'https://tools.publicis.sapient.com/bitbucket-code-commons/projects/XTI/repos/atomic-react-pattern-lib/browse',
-});
+addDecorator(withKnobs);
+addDecorator(withA11y);
+addDecorator(withDesign);
+addDecorator(
+  withTests({
+    results,
+  })
+);
 
-setDefaults({
-  sectionOptions: {
-    showSource: false,
-    allowSourceToggling: false,
-    showPropTables: false,
-    allowPropTablesToggling: false,
+addDecorator((storyFn, context) => (
+  <React.Fragment>
+    <GlobalStyles />
+    <ThemeProvider theme={theme}>{storyFn(context)}</ThemeProvider>
+  </React.Fragment>
+));
+
+const cssReq = require.context('!!raw-loader!../lib/styles/themes/base/tokens/', true, /.\.css$/);
+const cssTokenFiles = cssReq
+  .keys()
+  .map((filename) => ({ filename, content: cssReq(filename).default }));
+
+const svgIconsReq = require.context('!!raw-loader!../lib/styles/themes/base', true, /.\.svg$/);
+const svgIconTokenFiles = svgIconsReq
+  .keys()
+  .map((filename) => ({ filename, content: svgIconsReq(filename).default }));
+
+addParameters({
+  options: {
+    name: `Atomic React Pattern Library`,
+    url: 'https://github.com/pagesource/atomic-react-components',
+  },
+  docs: {
+    container: DocsContainer,
+    page: DocsPage,
+  },
+  design: {
+    type: 'figma',
+    url: 'https://www.figma.com/file/GBCGqs11KNeUyPksQzEMw0hr/Wireframing/duplicate?node-id=0%3A1', // TODO: to be updated as per style guide later
+  },
+  designToken: {
+    files: {
+      css: cssTokenFiles,
+      svgIcons: svgIconTokenFiles,
+    },
   },
 });
 
-addDecorator((storyFn, context) => (
-  <ThemeProvider theme={Theme}>{withConsole()(storyFn)(context)}</ThemeProvider>
-));
-
-setAddon(chaptersAddon);
-
-const req = require.context('../lib/components', true, /story\.js$/);
-
+const req = require.context('../lib/components/', true, /.stories\.(js|mdx)$/);
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+  req.keys().forEach((filename) => req(filename));
 }
 
 configure(loadStories, module);

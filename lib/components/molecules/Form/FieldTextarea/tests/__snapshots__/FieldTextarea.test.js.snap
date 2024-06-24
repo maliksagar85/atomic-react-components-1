@@ -1,17 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FieldTextarea Component should render correctly 1`] = `
-<div
-  className=""
+<form
+  onSubmit={[Function]}
 >
-  <Label
+  <div
+    errors={Object {}}
+    key=".0"
+    register={[Function]}
+    setValue={[Function]}
+  >
+    <FieldTextarea
+      className=""
+      errors={Object {}}
+      labelProps={Object {}}
+      onChange={null}
+      value=""
+    />
+    <FieldTextarea
+      className=""
+      errors={Object {}}
+      labelProps={Object {}}
+      onChange={null}
+      value=""
+    />
+  </div>
+  <Button
+    ariaLabel=""
     className=""
-  />
-  <C
-    render={[Function]}
-  />
-  <C
-    component={[Function]}
-  />
-</div>
+    disabled={false}
+    elementLocator=""
+    errors={Object {}}
+    inheritedStyles=""
+    key=".1"
+    primary={true}
+    register={[Function]}
+    secondary={false}
+    setValue={[Function]}
+    tertiary={false}
+    transparent={false}
+    type="submit"
+    variation=""
+  >
+    Submit
+  </Button>
+</form>
 `;

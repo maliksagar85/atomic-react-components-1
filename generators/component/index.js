@@ -16,7 +16,7 @@ module.exports = {
       name: 'type',
       message: 'Select the type of component',
       default: 'Stateless Function',
-      choices: () => ['Stateless Function', 'React.Component'],
+      choices: () => ['Stateless Function', 'Stateless Function (WithHooks)', 'HOC'],
     },
     {
       type: 'input',
@@ -38,7 +38,7 @@ module.exports = {
       name: 'folder',
       message: 'Where do you want to keep this component?',
       default: 'atoms',
-      choices: () => ['atoms', 'molecules'],
+      choices: () => ['Atoms', 'Molecules', 'HOC'],
     },
   ],
   actions: data => {
@@ -50,8 +50,12 @@ module.exports = {
         componentTemplate = './component/stateless.js.hbs';
         break;
       }
+      case 'HOC': {
+        componentTemplate = './component/hoc.js.hbs';
+        break;
+      }
       default: {
-        componentTemplate = './component/class.js.hbs';
+        componentTemplate = './component/statelessHooks.js.hbs';
       }
     }
 

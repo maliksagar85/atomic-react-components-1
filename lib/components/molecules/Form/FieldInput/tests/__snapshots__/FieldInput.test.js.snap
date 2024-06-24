@@ -1,18 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FieldInput Component should render correctly 1`] = `
-<div
-  className=""
+<form
+  onSubmit={[Function]}
 >
-  <Label
+  <div
+    errors={Object {}}
+    key=".0"
+    register={[Function]}
+    setValue={[Function]}
+  >
+    <FieldInput
+      className=""
+      errors={Object {}}
+      fieldProps={Object {}}
+      label="Enter username"
+      labelProps={Object {}}
+      name="username"
+      onBlur={null}
+      onChange={null}
+      placeholder=""
+      type="text"
+      validationInstructions="Enter valid username"
+    />
+    <FieldInput
+      className=""
+      errors={Object {}}
+      fieldProps={Object {}}
+      label="Enter username"
+      labelProps={Object {}}
+      name="username"
+      onBlur={null}
+      onChange={null}
+      placeholder=""
+      type="text"
+      validationInstructions="Enter valid username"
+    />
+  </div>
+  <Button
+    ariaLabel=""
     className=""
-  />
-  <C
-    render={[Function]}
-    type="text"
-  />
-  <C
-    component={[Function]}
-  />
-</div>
+    disabled={false}
+    elementLocator=""
+    errors={Object {}}
+    inheritedStyles=""
+    key=".1"
+    primary={true}
+    register={[Function]}
+    secondary={false}
+    setValue={[Function]}
+    tertiary={false}
+    transparent={false}
+    type="submit"
+    variation=""
+  >
+    Submit
+  </Button>
+</form>
 `;
